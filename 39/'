@@ -1,0 +1,56 @@
+import java.util.*;
+
+public class Solution {
+
+    public int n;
+    public int[] nums;
+    public Stack<Integer> stack;
+    public List<List<Integer>> res;
+
+    public int index(int target) {
+
+        int l = -1;
+        int r = n - 1;
+
+        while(l < r) {
+            int m = (l + r + 1) / 2;
+            if(nums[m] <= target) l = m;
+            else r = m - 1;
+        }
+
+        return l;
+    }
+
+    public void search(int target, int index) {
+
+        int k = Math.min(index(target), index);
+        if(k < 0) return;
+
+        for(int i=k; i >= 0; i--) {
+
+            stack.push(nums[i]);
+            int remain = target - nums[i];
+
+            if(remain == 0) res.add(new ArrayList<>(stack));
+            else search(remain, i);
+
+            stack.pop();
+
+        }
+    
+    }
+
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+
+        n = candidates.length;
+        nums = candidates;
+        Arrays.sort(nums);
+        stack = new Stack<>();
+        res = new ArrayList<>();
+
+        search(target, n - 1);
+
+        return res;
+    }
+
+}
