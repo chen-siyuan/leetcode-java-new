@@ -13,18 +13,46 @@ public class Solution {
 
         int i = 0;
         int j = 0;
+        int mm = m;
+        int nn = n;
 
-        int k = (Math.min(m, n) + 1) / 2;
-        for(; k >= 0; k--) {
-            System.out.println(3);
+        int k = (Math.min(m, n) - 1) / 2;
+        for(; k > 0; k--) {
+
+            for(int l=0; l < nn - 1; l++) res.add(matrix[i][j++]);
+            for(int l=0; l < mm - 1; l++) res.add(matrix[i++][j]);
+            for(int l=0; l < nn - 1; l++) res.add(matrix[i][j--]);
+            for(int l=0; l < mm - 1; l++) res.add(matrix[i--][j]);
+
+            i++;
+            j++;
+            mm -= 2;
+            nn -= 2;
+
         }
 
-        return null;
-    }
+        if(m < n) {
 
-    public static void main(String[] args) {
-        for(int i: new Solution().spiralOrder(new ))
-    
+            if(m % 2 == 0) {
+                for(int l=0; l < 2 + n - m; l++) res.add(matrix[i][j++]);
+                i++;
+                j--;
+                for(int l=0; l < 2 + n - m; l++) res.add(matrix[i][j--]);
+            } else for(int l=0; l < 1 + n - m; l++) res.add(matrix[i][j++]);
+        
+        } else {
+
+            if(n % 2 == 0) {
+                res.add(matrix[i][j++]);
+                for(int l=0; l < 2 + m - n; l++) res.add(matrix[i++][j]);
+                i--;
+                j--;
+                for(int l=0; l < 1 + m - n; l++) res.add(matrix[i--][j]);
+            } else for(int l=0; l < 1 + m - n; l++) res.add(matrix[i++][j]);
+        
+        }
+
+        return res;
     }
 
 }
