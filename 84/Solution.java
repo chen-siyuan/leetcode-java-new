@@ -9,7 +9,7 @@ public class Solution {
         int[] ns = new int[n];
         int max = 0;
 
-        PriorityQueue<E> pq = new PriorityQueue<>((a, b) -> (b.val - a.val));
+        PriorityQueue<Integer> pq = new PriorityQueue<>((a, b) -> (heights[b] - heights[a]));
         pq.offer(new E(n, -1));
 
         for(int i=n-1; i >= 0; i--) {
@@ -28,18 +28,6 @@ public class Solution {
         }
 
         return max;
-    }
-
-}
-
-class E {
-
-    public int index;
-    public int val;
-
-    public E(int _index, int _val) {
-        index = _index;
-        val = _val;
     }
 
 }
