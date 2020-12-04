@@ -7,6 +7,7 @@ public class Solution {
         Map<Integer, Integer> record = new HashMap<>();
         int n = nums.length;
         int m = n + 1;
+        System.out.println(m);
 
         for(int i=0; i < n; i++) {
             if(record.containsKey(target - nums[i])) return new int[]{record.get(target - nums[i]), i};
